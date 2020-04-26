@@ -1,0 +1,2395 @@
+{
+  "paragraphs": [
+    {
+      "title": "Import Libraries",
+      "text": "import org.apache.spark.sql.expressions.Window\nimport org.apache.spark.sql.functions._",
+      "dateUpdated": "Apr 26, 2020 4:08:57 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true,
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "paragraphProgress": {
+        "jobs": [],
+        "numCompletedTasks": 0,
+        "numTasks": 0,
+        "truncated": false
+      },
+      "version": "v1",
+      "jobName": "paragraph_1556807447008_1402784925",
+      "id": "20190502-143047_226494438_q_Z1JSRD53PM1587917672",
+      "dateCreated": "May 2, 2019 2:30:47 PM",
+      "dateSubmitted": "Apr 26, 2020 4:08:57 PM",
+      "dateStarted": "Apr 26, 2020 4:09:02 PM",
+      "dateFinished": "Apr 26, 2020 4:09:19 PM",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 1000
+    },
+    {
+      "title": "Create Sample DataFrame",
+      "text": "case class Salary(depName: String, empNo: Long, salary: Long)\nval empsalary \u003d Seq(\n  Salary(\"sales\", 1, 5000),\n  Salary(\"personnel\", 2, 3900),\n  Salary(\"sales\", 3, 4800),\n  Salary(\"sales\", 4, 4800),\n  Salary(\"personnel\", 5, 3500),\n  Salary(\"develop\", 7, 4200),\n  Salary(\"develop\", 8, 6000),\n  Salary(\"develop\", 9, 4500),\n  Salary(\"develop\", 10, 5200),\n  Salary(\"develop\", 11, 5200)).toDF()",
+      "dateUpdated": "Apr 26, 2020 4:08:58 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "paragraphProgress": {
+        "jobs": [],
+        "numCompletedTasks": 0,
+        "numTasks": 0,
+        "truncated": false
+      },
+      "version": "v1",
+      "jobName": "paragraph_1556807421476_764840600",
+      "id": "20190502-143021_519010426_q_Z1JSRD53PM1587917672",
+      "dateCreated": "May 2, 2019 2:30:21 PM",
+      "dateSubmitted": "Apr 26, 2020 4:09:02 PM",
+      "dateStarted": "Apr 26, 2020 4:09:19 PM",
+      "dateFinished": "Apr 26, 2020 4:09:22 PM",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 1000
+    },
+    {
+      "title": "Display DataFrame",
+      "text": "empsalary.show()",
+      "dateUpdated": "Apr 26, 2020 4:09:01 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "depName",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "empNo",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "depName",
+              "index": 0.0,
+              "aggr": "sum"
+            },
+            "yAxis": {
+              "name": "empNo",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "paragraphProgress": {
+        "jobs": [],
+        "numCompletedTasks": 0,
+        "numTasks": 0,
+        "truncated": false
+      },
+      "version": "v1",
+      "jobName": "paragraph_1556807432425_-197416399",
+      "id": "20190502-143032_1394657585_q_Z1JSRD53PM1587917672",
+      "dateCreated": "May 2, 2019 2:30:32 PM",
+      "dateSubmitted": "Apr 26, 2020 4:09:19 PM",
+      "dateStarted": "Apr 26, 2020 4:09:22 PM",
+      "dateFinished": "Apr 26, 2020 4:09:22 PM",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 1000
+    },
+    {
+      "title": "Create Window Specification for Aggregate Function",
+      "text": "val byDepName \u003d Window.partitionBy(\"depName\")",
+      "dateUpdated": "Apr 26, 2020 4:09:03 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "paragraphProgress": {
+        "jobs": [],
+        "numCompletedTasks": 0,
+        "numTasks": 0,
+        "truncated": false
+      },
+      "version": "v1",
+      "jobName": "paragraph_1556807487841_1663906834",
+      "id": "20190502-143127_1997504610_q_Z1JSRD53PM1587917672",
+      "dateCreated": "May 2, 2019 2:31:27 PM",
+      "dateSubmitted": "Apr 26, 2020 4:09:22 PM",
+      "dateStarted": "Apr 26, 2020 4:09:22 PM",
+      "dateFinished": "Apr 26, 2020 4:09:23 PM",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 1000
+    },
+    {
+      "title": "Apply Aggregate Function on Window",
+      "text": "val agg_sal \u003d (empsalary\n                .withColumn(\"max_salary\", max(\"salary\").over(byDepName))\n                .withColumn(\"min_salary\", min(\"salary\").over(byDepName)))\n                \nagg_sal.select(\"depname\", \"max_salary\", \"min_salary\")\n.dropDuplicates().show()",
+      "dateUpdated": "Apr 26, 2020 4:09:03 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "depname",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "depname",
+              "index": 0.0,
+              "aggr": "sum"
+            },
+            "yAxis": {
+              "name": "agg_salary",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "paragraphProgress": {
+        "jobs": [
+          {
+            "id": 0,
+            "numCompletedTasks": 11,
+            "stages": [
+              {
+                "id": 0,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 10,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 1,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 1,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 1
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 1,
+            "numTasks": 14,
+            "numCompletedTasks": 4,
+            "stages": [
+              {
+                "id": 2,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 3,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 4,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 4
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 2,
+            "numCompletedTasks": 20,
+            "stages": [
+              {
+                "id": 5,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 20,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 20
+              },
+              {
+                "id": 4,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 3,
+            "numTasks": 110,
+            "numCompletedTasks": 100,
+            "stages": [
+              {
+                "id": 6,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 7,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 100,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 100
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 4,
+            "numTasks": 85,
+            "numCompletedTasks": 75,
+            "stages": [
+              {
+                "id": 9,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 75,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 75
+              },
+              {
+                "id": 8,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              }
+            ],
+            "status": "Success"
+          }
+        ],
+        "numCompletedTasks": 210,
+        "numTasks": 250,
+        "truncated": false
+      },
+      "version": "v1",
+      "jobName": "paragraph_1556807574257_-1572662210",
+      "id": "20190502-143254_1444296953_q_Z1JSRD53PM1587917672",
+      "dateCreated": "May 2, 2019 2:32:54 PM",
+      "dateSubmitted": "Apr 26, 2020 4:09:23 PM",
+      "dateStarted": "Apr 26, 2020 4:09:23 PM",
+      "dateFinished": "Apr 26, 2020 4:09:28 PM",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 1000
+    },
+    {
+      "title": "Create Window Specification for Ranking Function",
+      "text": "val winSpec \u003d Window.partitionBy(\"depName\").orderBy($\"salary\".desc)",
+      "dateUpdated": "Apr 26, 2020 4:09:08 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "paragraphProgress": {
+        "jobs": [],
+        "numCompletedTasks": 0,
+        "numTasks": 0,
+        "truncated": false
+      },
+      "version": "v1",
+      "jobName": "paragraph_1556807907720_-1515458862",
+      "id": "20190502-143827_1678264739_q_Z1JSRD53PM1587917672",
+      "dateCreated": "May 2, 2019 2:38:27 PM",
+      "dateSubmitted": "Apr 26, 2020 4:09:23 PM",
+      "dateStarted": "Apr 26, 2020 4:09:28 PM",
+      "dateFinished": "Apr 26, 2020 4:09:28 PM",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 1000
+    },
+    {
+      "title": "Apply Rank Function",
+      "text": "val rank_df \u003d empsalary.withColumn(\"rank\", rank().over(winSpec))\nrank_df.show()",
+      "dateUpdated": "Apr 26, 2020 4:09:14 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "depName",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "empNo",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "depName",
+              "index": 0.0,
+              "aggr": "sum"
+            },
+            "yAxis": {
+              "name": "empNo",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "paragraphProgress": {
+        "jobs": [
+          {
+            "id": 5,
+            "numTasks": 11,
+            "numCompletedTasks": 11,
+            "stages": [
+              {
+                "id": 10,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 10,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 11,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 1,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 1
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 6,
+            "numTasks": 14,
+            "numCompletedTasks": 4,
+            "stages": [
+              {
+                "id": 12,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 13,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 4,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 4
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 7,
+            "numTasks": 30,
+            "numCompletedTasks": 20,
+            "stages": [
+              {
+                "id": 15,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 20,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 20
+              },
+              {
+                "id": 14,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 8,
+            "numTasks": 110,
+            "numCompletedTasks": 100,
+            "stages": [
+              {
+                "id": 16,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 17,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 100,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 100
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 9,
+            "numTasks": 85,
+            "numCompletedTasks": 75,
+            "stages": [
+              {
+                "id": 19,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 75,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 75
+              },
+              {
+                "id": 18,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              }
+            ],
+            "status": "Success"
+          }
+        ],
+        "numCompletedTasks": 210,
+        "numTasks": 250,
+        "truncated": false
+      },
+      "version": "v1",
+      "jobName": "paragraph_1556807704309_-1712959285",
+      "id": "20190502-143504_851126978_q_Z1JSRD53PM1587917672",
+      "dateCreated": "May 2, 2019 2:35:04 PM",
+      "dateSubmitted": "Apr 26, 2020 4:09:28 PM",
+      "dateStarted": "Apr 26, 2020 4:09:28 PM",
+      "dateFinished": "Apr 26, 2020 4:09:29 PM",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 1000
+    },
+    {
+      "title": "Apply Dense Rank Function",
+      "text": "val dense_rank_df \u003d empsalary.withColumn(\"desnse_rank\", dense_rank().over(winSpec))\ndense_rank_df.show()",
+      "dateUpdated": "Apr 26, 2020 4:09:18 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "depName",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "empNo",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "depName",
+              "index": 0.0,
+              "aggr": "sum"
+            },
+            "yAxis": {
+              "name": "empNo",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "paragraphProgress": {
+        "jobs": [
+          {
+            "id": 10,
+            "numTasks": 11,
+            "numCompletedTasks": 11,
+            "stages": [
+              {
+                "id": 20,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 10,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 21,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 1,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 1
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 11,
+            "numTasks": 14,
+            "numCompletedTasks": 4,
+            "stages": [
+              {
+                "id": 22,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 23,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 4,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 4
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 12,
+            "numTasks": 30,
+            "numCompletedTasks": 20,
+            "stages": [
+              {
+                "id": 24,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 25,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 20,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 20
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 13,
+            "numTasks": 110,
+            "numCompletedTasks": 100,
+            "stages": [
+              {
+                "id": 27,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 100,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 100
+              },
+              {
+                "id": 26,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 14,
+            "numTasks": 85,
+            "numCompletedTasks": 75,
+            "stages": [
+              {
+                "id": 28,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 29,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 75,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 75
+              }
+            ],
+            "status": "Success"
+          }
+        ],
+        "numCompletedTasks": 210,
+        "numTasks": 250,
+        "truncated": false
+      },
+      "version": "v1",
+      "jobName": "paragraph_1556807892904_-109986454",
+      "id": "20190502-143812_518402902_q_Z1JSRD53PM1587917672",
+      "dateCreated": "May 2, 2019 2:38:12 PM",
+      "dateSubmitted": "Apr 26, 2020 4:09:29 PM",
+      "dateStarted": "Apr 26, 2020 4:09:29 PM",
+      "dateFinished": "Apr 26, 2020 4:09:30 PM",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 1000
+    },
+    {
+      "title": "row_number",
+      "text": "val row_num_df \u003d empsalary.withColumn(\"row_number\", row_number().over(winSpec))\nrow_num_df.show()",
+      "dateUpdated": "Apr 26, 2020 4:09:25 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "depName",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "empNo",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "depName",
+              "index": 0.0,
+              "aggr": "sum"
+            },
+            "yAxis": {
+              "name": "empNo",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "paragraphProgress": {
+        "jobs": [
+          {
+            "id": 15,
+            "numTasks": 11,
+            "numCompletedTasks": 11,
+            "stages": [
+              {
+                "id": 30,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 10,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 31,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 1,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 1
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 16,
+            "numTasks": 14,
+            "numCompletedTasks": 4,
+            "stages": [
+              {
+                "id": 33,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 4,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 4
+              },
+              {
+                "id": 32,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 17,
+            "numTasks": 30,
+            "numCompletedTasks": 20,
+            "stages": [
+              {
+                "id": 34,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 35,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 20,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 20
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 18,
+            "numTasks": 110,
+            "numCompletedTasks": 100,
+            "stages": [
+              {
+                "id": 37,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 100,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 100
+              },
+              {
+                "id": 36,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 19,
+            "numTasks": 85,
+            "numCompletedTasks": 75,
+            "stages": [
+              {
+                "id": 38,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 39,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 75,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 75
+              }
+            ],
+            "status": "Success"
+          }
+        ],
+        "numCompletedTasks": 210,
+        "numTasks": 250,
+        "truncated": false
+      },
+      "version": "v1",
+      "jobName": "paragraph_1556808146829_976896896",
+      "id": "20190502-144226_87143599_q_Z1JSRD53PM1587917672",
+      "dateCreated": "May 2, 2019 2:42:26 PM",
+      "dateSubmitted": "Apr 26, 2020 4:09:29 PM",
+      "dateStarted": "Apr 26, 2020 4:09:30 PM",
+      "dateFinished": "Apr 26, 2020 4:09:31 PM",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 1000
+    },
+    {
+      "title": "percent_rank",
+      "text": "val percent_rank_df \u003d empsalary.withColumn(\"percent_rank\", percent_rank().over(winSpec))\npercent_rank_df.show()",
+      "dateUpdated": "Apr 26, 2020 4:09:36 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "depName",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "empNo",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "depName",
+              "index": 0.0,
+              "aggr": "sum"
+            },
+            "yAxis": {
+              "name": "empNo",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "paragraphProgress": {
+        "jobs": [
+          {
+            "id": 20,
+            "numTasks": 11,
+            "numCompletedTasks": 11,
+            "stages": [
+              {
+                "id": 40,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 10,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 41,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 1,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 1
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 21,
+            "numTasks": 14,
+            "numCompletedTasks": 4,
+            "stages": [
+              {
+                "id": 42,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 43,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 4,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 4
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 22,
+            "numTasks": 30,
+            "numCompletedTasks": 20,
+            "stages": [
+              {
+                "id": 45,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 20,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 20
+              },
+              {
+                "id": 44,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 23,
+            "numTasks": 110,
+            "numCompletedTasks": 100,
+            "stages": [
+              {
+                "id": 46,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 47,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 100,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 100
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 24,
+            "numTasks": 85,
+            "numCompletedTasks": 75,
+            "stages": [
+              {
+                "id": 48,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 49,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 75,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 75
+              }
+            ],
+            "status": "Success"
+          }
+        ],
+        "numCompletedTasks": 210,
+        "numTasks": 250,
+        "truncated": false
+      },
+      "version": "v1",
+      "jobName": "paragraph_1556808232335_-1741556292",
+      "id": "20190502-144352_1182848716_q_Z1JSRD53PM1587917672",
+      "dateCreated": "May 2, 2019 2:43:52 PM",
+      "dateSubmitted": "Apr 26, 2020 4:09:36 PM",
+      "dateStarted": "Apr 26, 2020 4:09:36 PM",
+      "dateFinished": "Apr 26, 2020 4:09:36 PM",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 1000
+    },
+    {
+      "title": "ntile",
+      "text": "val ntile_df \u003d empsalary.withColumn(\"ntile\", ntile(3).over(winSpec))\nntile_df.show()",
+      "dateUpdated": "Apr 26, 2020 4:09:44 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "depName",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "empNo",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "depName",
+              "index": 0.0,
+              "aggr": "sum"
+            },
+            "yAxis": {
+              "name": "empNo",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "paragraphProgress": {
+        "jobs": [
+          {
+            "id": 25,
+            "numTasks": 11,
+            "numCompletedTasks": 11,
+            "stages": [
+              {
+                "id": 51,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 1,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 1
+              },
+              {
+                "id": 50,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 10,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 26,
+            "numTasks": 14,
+            "numCompletedTasks": 4,
+            "stages": [
+              {
+                "id": 52,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 53,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 4,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 4
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 27,
+            "numTasks": 30,
+            "numCompletedTasks": 20,
+            "stages": [
+              {
+                "id": 54,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 55,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 20,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 20
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 28,
+            "numTasks": 110,
+            "numCompletedTasks": 100,
+            "stages": [
+              {
+                "id": 56,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 57,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 100,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 100
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 29,
+            "numTasks": 85,
+            "numCompletedTasks": 75,
+            "stages": [
+              {
+                "id": 58,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 59,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 75,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 75
+              }
+            ],
+            "status": "Success"
+          }
+        ],
+        "numCompletedTasks": 210,
+        "numTasks": 250,
+        "truncated": false
+      },
+      "version": "v1",
+      "jobName": "paragraph_1556808355366_-53077259",
+      "id": "20190502-144555_1117970161_q_Z1JSRD53PM1587917672",
+      "dateCreated": "May 2, 2019 2:45:55 PM",
+      "dateSubmitted": "Apr 26, 2020 4:09:44 PM",
+      "dateStarted": "Apr 26, 2020 4:09:45 PM",
+      "dateFinished": "Apr 26, 2020 4:09:45 PM",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 1000
+    },
+    {
+      "title": "cume_dist",
+      "text": "val winSpec \u003d Window.partitionBy(\"depName\").orderBy(\"salary\")\n\nval cume_dist_df \u003d empsalary\n.withColumn(\"cume_dist\",cume_dist().over(winSpec))\n\ncume_dist_df.show()",
+      "dateUpdated": "Apr 26, 2020 4:09:58 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "depName",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "depName",
+              "index": 0.0,
+              "aggr": "sum"
+            },
+            "yAxis": {
+              "name": "empNo",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "paragraphProgress": {
+        "jobs": [
+          {
+            "id": 30,
+            "numTasks": 11,
+            "numCompletedTasks": 11,
+            "stages": [
+              {
+                "id": 60,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 10,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 61,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 1,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 1
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 31,
+            "numTasks": 14,
+            "numCompletedTasks": 4,
+            "stages": [
+              {
+                "id": 63,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 4,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 4
+              },
+              {
+                "id": 62,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 32,
+            "numTasks": 30,
+            "numCompletedTasks": 20,
+            "stages": [
+              {
+                "id": 64,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 65,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 20,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 20
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 33,
+            "numTasks": 110,
+            "numCompletedTasks": 100,
+            "stages": [
+              {
+                "id": 66,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 67,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 100,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 100
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 34,
+            "numTasks": 85,
+            "numCompletedTasks": 75,
+            "stages": [
+              {
+                "id": 68,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 69,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 75,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 75
+              }
+            ],
+            "status": "Success"
+          }
+        ],
+        "numCompletedTasks": 210,
+        "numTasks": 250,
+        "truncated": false
+      },
+      "version": "v1",
+      "jobName": "paragraph_1587851200305_33430124",
+      "id": "20200425-214640_1274577400_q_Z1JSRD53PM1587917672",
+      "dateCreated": "Apr 25, 2020 9:46:40 PM",
+      "dateSubmitted": "Apr 26, 2020 4:09:58 PM",
+      "dateStarted": "Apr 26, 2020 4:09:58 PM",
+      "dateFinished": "Apr 26, 2020 4:09:59 PM",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 1000
+    },
+    {
+      "title": "lag",
+      "text": "val winSpec \u003d Window.partitionBy(\"depName\").orderBy(\"salary\")\n\nval lag_df \u003d empsalary.withColumn(\"lag\", lag(\"salary\", 2).over(winSpec))\n\nlag_df.show()",
+      "dateUpdated": "Apr 26, 2020 4:10:41 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "depName",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "depName",
+              "index": 0.0,
+              "aggr": "sum"
+            },
+            "yAxis": {
+              "name": "empNo",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "paragraphProgress": {
+        "jobs": [
+          {
+            "id": 35,
+            "numTasks": 11,
+            "numCompletedTasks": 11,
+            "stages": [
+              {
+                "id": 70,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 10,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 71,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 1,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 1
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 36,
+            "numTasks": 14,
+            "numCompletedTasks": 4,
+            "stages": [
+              {
+                "id": 72,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 73,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 4,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 4
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 37,
+            "numTasks": 30,
+            "numCompletedTasks": 20,
+            "stages": [
+              {
+                "id": 74,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 75,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 20,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 20
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 38,
+            "numTasks": 110,
+            "numCompletedTasks": 100,
+            "stages": [
+              {
+                "id": 76,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 77,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 100,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 100
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 39,
+            "numTasks": 85,
+            "numCompletedTasks": 75,
+            "stages": [
+              {
+                "id": 78,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 79,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 75,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 75
+              }
+            ],
+            "status": "Success"
+          }
+        ],
+        "numCompletedTasks": 210,
+        "numTasks": 250,
+        "truncated": false
+      },
+      "version": "v1",
+      "jobName": "paragraph_1587851599501_-1268243804",
+      "id": "20200425-215319_118250143_q_Z1JSRD53PM1587917672",
+      "dateCreated": "Apr 25, 2020 9:53:19 PM",
+      "dateSubmitted": "Apr 26, 2020 4:10:41 PM",
+      "dateStarted": "Apr 26, 2020 4:10:41 PM",
+      "dateFinished": "Apr 26, 2020 4:10:42 PM",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 1000
+    },
+    {
+      "title": "lead",
+      "text": "val winSpec \u003d Window.partitionBy(\"depName\").orderBy(\"salary\")\n\nval lead_df \u003d empsalary.withColumn(\"lag\", lead(\"salary\", 2).over(winSpec))\n\nlead_df.show()",
+      "dateUpdated": "Apr 26, 2020 4:10:52 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "depName",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "depName",
+              "index": 0.0,
+              "aggr": "sum"
+            },
+            "yAxis": {
+              "name": "empNo",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "paragraphProgress": {
+        "jobs": [
+          {
+            "id": 40,
+            "numTasks": 11,
+            "numCompletedTasks": 11,
+            "stages": [
+              {
+                "id": 81,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 1,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 1
+              },
+              {
+                "id": 80,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 10,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 41,
+            "numTasks": 14,
+            "numCompletedTasks": 4,
+            "stages": [
+              {
+                "id": 82,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 83,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 4,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 4
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 42,
+            "numTasks": 30,
+            "numCompletedTasks": 20,
+            "stages": [
+              {
+                "id": 84,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 85,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 20,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 20
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 43,
+            "numTasks": 110,
+            "numCompletedTasks": 100,
+            "stages": [
+              {
+                "id": 86,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 87,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 100,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 100
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 44,
+            "numTasks": 85,
+            "numCompletedTasks": 75,
+            "stages": [
+              {
+                "id": 88,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 89,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 75,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 75
+              }
+            ],
+            "status": "Success"
+          }
+        ],
+        "numCompletedTasks": 210,
+        "numTasks": 250,
+        "truncated": false
+      },
+      "version": "v1",
+      "jobName": "paragraph_1587852210949_1408743809",
+      "id": "20200425-220330_924354791_q_Z1JSRD53PM1587917672",
+      "dateCreated": "Apr 25, 2020 10:03:30 PM",
+      "dateSubmitted": "Apr 26, 2020 4:10:52 PM",
+      "dateStarted": "Apr 26, 2020 4:10:52 PM",
+      "dateFinished": "Apr 26, 2020 4:10:53 PM",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 1000
+    },
+    {
+      "title": "rangeBetween",
+      "text": "val winSpec \u003d Window.partitionBy(\"depName\").orderBy(\"salary\").rangeBetween(100L, 300L)\n\nval range_between_df \u003d empsalary.withColumn(\"max_salary\", max(\"salary\").over(winSpec))\n\nrange_between_df.show()",
+      "dateUpdated": "Apr 26, 2020 4:13:14 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "paragraphProgress": {
+        "jobs": [],
+        "numCompletedTasks": 0,
+        "numTasks": 0,
+        "truncated": false
+      },
+      "version": "v1",
+      "jobName": "paragraph_1556808409262_-1901902994",
+      "id": "20190502-144649_2105946666_q_Z1JSRD53PM1587917672",
+      "dateCreated": "May 2, 2019 2:46:49 PM",
+      "dateSubmitted": "Apr 26, 2020 11:17:29 AM",
+      "dateStarted": "Apr 26, 2020 11:17:30 AM",
+      "dateFinished": "Apr 26, 2020 11:17:30 AM",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 1000
+    },
+    {
+      "title": "rangeBetween with Special boundary",
+      "text": "/*\nThere are some special bourdary values which can be used here.\n Window.currentRow : to specify current value in a row.\n Window.unboundedPreceding : This can used to have unbounded start of the window.\n Window.unboundedFollowing : This can be used unbounded end of the window.\n*/\nval winSpec \u003d Window.partitionBy(\"depName\").orderBy(\"salary\").rangeBetween(300L, Window.unboundedFollowing)\n\nval range_unbounded_df \u003d empsalary.withColumn(\"max_salary\", max(\"salary\").over(winSpec))\n\nrange_unbounded_df.show()\n",
+      "dateUpdated": "Apr 26, 2020 4:13:34 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "paragraphProgress": {
+        "jobs": [
+          {
+            "id": 45,
+            "numTasks": 11,
+            "numCompletedTasks": 11,
+            "stages": [
+              {
+                "id": 90,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 10,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 91,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 1,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 1
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 46,
+            "numTasks": 14,
+            "numCompletedTasks": 4,
+            "stages": [
+              {
+                "id": 93,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 4,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 4
+              },
+              {
+                "id": 92,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 47,
+            "numTasks": 30,
+            "numCompletedTasks": 20,
+            "stages": [
+              {
+                "id": 94,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 95,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 20,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 20
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 48,
+            "numTasks": 110,
+            "numCompletedTasks": 100,
+            "stages": [
+              {
+                "id": 96,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 97,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 100,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 100
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 49,
+            "numTasks": 85,
+            "numCompletedTasks": 75,
+            "stages": [
+              {
+                "id": 99,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 75,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 75
+              },
+              {
+                "id": 98,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              }
+            ],
+            "status": "Success"
+          }
+        ],
+        "numCompletedTasks": 210,
+        "numTasks": 250,
+        "truncated": false
+      },
+      "version": "v1",
+      "jobName": "paragraph_1587849245592_1085894630",
+      "id": "20200425-211405_486758724_q_Z1JSRD53PM1587917672",
+      "dateCreated": "Apr 25, 2020 9:14:05 PM",
+      "dateSubmitted": "Apr 26, 2020 4:13:34 PM",
+      "dateStarted": "Apr 26, 2020 4:13:35 PM",
+      "dateFinished": "Apr 26, 2020 4:13:35 PM",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 1000
+    },
+    {
+      "title": "rowsBetween",
+      "text": "val winSpec \u003d Window.partitionBy(\"depName\").orderBy(\"salary\").rowsBetween(-1, 1)\n\nval rows_between_df \u003d empsalary.withColumn(\"max_salary\", max(\"salary\").over(winSpec))\n\nrows_between_df.show()",
+      "dateUpdated": "Apr 26, 2020 4:13:55 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "depName",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "depName",
+              "index": 0.0,
+              "aggr": "sum"
+            },
+            "yAxis": {
+              "name": "empNo",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "paragraphProgress": {
+        "jobs": [
+          {
+            "id": 50,
+            "numTasks": 11,
+            "numCompletedTasks": 11,
+            "stages": [
+              {
+                "id": 100,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 10,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 101,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 1,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 1
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 51,
+            "numTasks": 14,
+            "numCompletedTasks": 4,
+            "stages": [
+              {
+                "id": 102,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 103,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 4,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 4
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 52,
+            "numTasks": 30,
+            "numCompletedTasks": 20,
+            "stages": [
+              {
+                "id": 104,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 105,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 20,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 20
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 53,
+            "numTasks": 110,
+            "numCompletedTasks": 100,
+            "stages": [
+              {
+                "id": 107,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 100,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 100
+              },
+              {
+                "id": 106,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              }
+            ],
+            "status": "Success"
+          },
+          {
+            "id": 54,
+            "numTasks": 85,
+            "numCompletedTasks": 75,
+            "stages": [
+              {
+                "id": 108,
+                "completed": false,
+                "status": "Skipped",
+                "numCompleteTasks": 0,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 10
+              },
+              {
+                "id": 109,
+                "completed": true,
+                "status": "Completed",
+                "numCompleteTasks": 75,
+                "numActiveTasks": 0,
+                "numFailedTasks": 0,
+                "numTotalTasks": 75
+              }
+            ],
+            "status": "Success"
+          }
+        ],
+        "numCompletedTasks": 210,
+        "numTasks": 250,
+        "truncated": false
+      },
+      "version": "v1",
+      "jobName": "paragraph_1587850225346_-310316445",
+      "id": "20200425-213025_486149715_q_Z1JSRD53PM1587917672",
+      "dateCreated": "Apr 25, 2020 9:30:25 PM",
+      "dateSubmitted": "Apr 26, 2020 4:13:55 PM",
+      "dateStarted": "Apr 26, 2020 4:13:55 PM",
+      "dateFinished": "Apr 26, 2020 4:13:55 PM",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 1000
+    },
+    {
+      "title": "Thank You",
+      "text": "%md\n### Thank You",
+      "dateUpdated": "Apr 26, 2020 4:14:12 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/markdown",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "version": "v1",
+      "jobName": "paragraph_1587851187063_-308257548",
+      "id": "20200425-214627_459135192_q_Z1JSRD53PM1587917672",
+      "dateCreated": "Apr 25, 2020 9:46:27 PM",
+      "dateSubmitted": "Apr 26, 2020 4:14:12 PM",
+      "dateStarted": "Apr 26, 2020 4:14:12 PM",
+      "dateFinished": "Apr 26, 2020 4:14:12 PM",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 1000
+    }
+  ],
+  "name": "window_function - blog",
+  "id": "Z1JSRD53PM1587917672",
+  "angularObjects": {
+    "2EFND38QE887921560510619304:shared_process": [],
+    "2EDF1MQVF887921560510619305:shared_process": [],
+    "2EH5BJUYN887921563307922802:shared_process": [],
+    "2EFD1GQVS887921560510619304:shared_process": []
+  },
+  "config": {
+    "isDashboard": false,
+    "defaultLang": "spark"
+  },
+  "info": {},
+  "source": "FCN"
+}
