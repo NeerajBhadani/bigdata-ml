@@ -58,7 +58,7 @@ ntile_df.show()
 
 // cume_dist
 val winSpec = Window.partitionBy("depName").orderBy("salary")
-val cume_dist_df = empsalary.withColumn("cume_dist",cume_dist().over(winSpec))
+val cume_dist_df = empsalary.withColumn("cume_dist", cume_dist().over(winSpec))
 cume_dist_df.show()
 
 // lag
@@ -68,7 +68,7 @@ lag_df.show()
 
 // lead
 val winSpec = Window.partitionBy("depName").orderBy("salary")
-val lead_df = empsalary.withColumn("lag", lead("salary", 2).over(winSpec))
+val lead_df = empsalary.withColumn("lead", lead("salary", 2).over(winSpec))
 lead_df.show()
 
 // rangeBetween
